@@ -6,7 +6,7 @@ class Host extends Model {}
 
 Host.init(
   {
-    id: {
+    host_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
@@ -41,7 +41,7 @@ Host.init(
       type: DataTypes.INTEGER,
       allowNULL: false,
       defaultValue: 0
-    },
+    }
   },
   {
     sequelize,

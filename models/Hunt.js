@@ -37,7 +37,7 @@ Hunt.init(
       primaryKey: true,
       references: {
         model: 'host',
-        key: 'id',
+        key: 'host_id',
       },
     },
   },

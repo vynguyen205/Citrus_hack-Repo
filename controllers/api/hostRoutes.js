@@ -1,11 +1,18 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
-const { Host } = require('../../models');
+const { Host, Hunt } = require('../../models');
 
 //GET route for host information
 router.get('/', async (req, res) => {
     try {
-        const hostData = await Host.findAll();
+        const hostData = await Host.findAll({
+            include: [
+                {
+                    model: Hunt,
+                    attributes: ['hunt_id', 'code', 'name'],
+                },
+            ],
+        });
         
         if (!hostData) {
         res.status(404).json({ message: 'No Host Found! 🥲' });
