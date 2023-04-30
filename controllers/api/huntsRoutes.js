@@ -1,9 +1,14 @@
 const router = require('express').Router();
-const { Hunt } = require('../../models');
+const { Hunt, Host } = require('../../models');
 
+//This POST route is for creating a new hunt
 router.post('/', async (req, res) => {
   try {
-    const newHunt = await Hunt.create(req.body);
+    const newHunt = await Hunt.create(req.body, { 
+      where: {
+        host_id: req.body.host_id,
+        } 
+      });
 
     res.status(200).json(newHunt);
   } catch (err) {
@@ -11,16 +16,17 @@ router.post('/', async (req, res) => {
   }
 });
 
-//GET route for all hunt information
+//GET route for hunt information and add host information
 router.get('/', async (req, res) => {
   try {
-    const newHunt = await Hunt.findAll({
-      where: {
-        user_id: req.session.hunt_id,
-      },
-    });
+    const huntData = await Hunt.findAll();
 
-    res.status(200).json(newHunt);
+    if (!huntData) {
+      res.status(404).json({ message: 'No Hunt Found! 🥲' });
+      return;
+    } else {
+      res.status(200).json(huntData);
+    }
   } catch (err) {
     res.status(500).json(err);
   }

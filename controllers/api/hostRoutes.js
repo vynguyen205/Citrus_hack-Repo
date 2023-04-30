@@ -1,6 +1,29 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
-const { Host } = require('../../models');
+const { Host, Hunt } = require('../../models');
+
+//GET route for host information
+router.get('/', async (req, res) => {
+    try {
+        const hostData = await Host.findAll({
+            include: [
+                {
+                    model: Hunt,
+                    attributes: ['hunt_id', 'code', 'name'],
+                },
+            ],
+        });
+        
+        if (!hostData) {
+        res.status(404).json({ message: 'No Host Found! 🥲' });
+        return;
+        } else {
+        res.status(200).json(hostData);
+        }
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
 
 //This POST route is for creating a new host
 router.post('/', async (req, res) => {
@@ -16,21 +39,6 @@ router.post('/', async (req, res) => {
     }
 });
 
-//GET route for host information
-router.get('/:id', async (req, res) => {
-    try {
-        const hostData = await Host.findByPk(req.params.id);
-        
-        if (!hostData) {
-        res.status(404).json({ message: 'No host found with this id!' });
-        return;
-        } else {
-        res.status(200).json(hostData);
-        }
-    } catch (err) {
-        res.status(500).json(err);
-    }
-});
 
 //PUT route for updating host information
 router.put('/:id', async (req, res) => {
@@ -42,7 +50,7 @@ router.put('/:id', async (req, res) => {
         });
 
         if (!hostData) {
-            res.status(404).json({ message: 'No host found with this id!' });
+            res.status(404).json({ message: 'No Host Found! 🥲' });
             return;
         } else {
             res.status(200).json(hostData);
@@ -62,7 +70,7 @@ router.delete('/:id', async (req, res) => {
         });
 
         if (!hostData) {
-            res.status(404).json({ message: 'No host found with this id!' });
+            res.status(404).json({ message: 'No Host Found! 🥲' });
             return;
         } else {
             res.status(200).json(hostData);

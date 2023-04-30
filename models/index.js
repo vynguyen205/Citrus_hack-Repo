@@ -3,8 +3,9 @@ const Hunt = require('./Hunt');
 const Player = require('./Player');
 
 Host.hasMany(Hunt, {
-  onDelete: 'CASCADE'
+  onDelete: 'CASCADE',
 });
+
 Hunt.belongsTo(Host);
 
 // Player.hasOne()

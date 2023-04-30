@@ -19,14 +19,14 @@ Player.init(
         type: DataTypes.INTEGER,
         references: {
           model: 'host',
-          key: 'id',
+          key: 'host_id',
         },
       },
-      code: {
+      hunt_id: {
         type: DataTypes.INTEGER,
         references: {
           model: 'hunt',
-          key: 'code',
+          key: 'hunt_id',
         },
       },
     },
