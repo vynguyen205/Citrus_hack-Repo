@@ -12,6 +12,7 @@ Player.init(
             model: 'user',
             key: 'id',
         },
+        primaryKey: true,
       },
     },
     {
