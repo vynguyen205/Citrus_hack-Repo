@@ -22,11 +22,11 @@ Player.init(
           key: 'id',
         },
       },
-      code: {
+      hunt_id: {
         type: DataTypes.INTEGER,
         references: {
           model: 'hunt',
-          key: 'code',
+          key: 'hunt_id',
         },
       },
     },

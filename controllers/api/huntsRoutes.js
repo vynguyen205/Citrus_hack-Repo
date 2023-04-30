@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Hunt } = require('../../models');
+const { Hunt, Host } = require('../../models');
 
 router.post('/', async (req, res) => {
   try {
@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
   try {
     const newHunt = await Hunt.findAll({
       where: {
-        user_id: req.session.hunt_id,
+        hunt_id: req.session.hunt_id,
       },
     });
 
