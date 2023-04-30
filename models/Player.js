@@ -6,10 +6,11 @@ class Player extends Model {}
 
 Player.init(
     {
-      play_id: {
+      player_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         allowNull: false,
+        autoIncrement:true,
       },
       username: {
         type: DataTypes.STRING,
