@@ -1,16 +1,16 @@
 const router = require('express').Router();
+const bcrypt = require('bcrypt');
 const { Host } = require('../../models');
 
 //This POST route is for creating a new host
 router.post('/', async (req, res) => {
     try {
         const hostData = await Host.create(req.body);
-    
-        req.session.save(() => {
-        req.session.host_id = hostData.id;
+
+        // hash the password from 'req.body' and save to hostData
+        hostData.password = await bcrypt.hash(req.body.password, 10);
     
         res.status(200).json(hostData);
-        });
     } catch (err) {
         res.status(400).json(err);
     }

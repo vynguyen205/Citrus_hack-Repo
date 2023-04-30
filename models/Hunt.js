@@ -5,7 +5,7 @@ class Hunt extends Model {}
 
 Hunt.init(
   {
-    hunt_id: {
+    code: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
@@ -27,7 +27,6 @@ Hunt.init(
       type: DataTypes.INTEGER,
       allowNull: true,
     },
-
     host_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,

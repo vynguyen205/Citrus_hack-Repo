@@ -1,18 +1,19 @@
 const { Model, DataTypes } = require('sequelize');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 
 class Player extends Model {}
 
 Player.init(
     {
-      id: {
+      play_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        references: {
-            model: 'user',
-            key: 'id',
-        },
+        allowNull: false,
+      },
+      username: {
+        type: DataTypes.STRING,
+        allowNull: false,
       },
       host_id: {
         type: DataTypes.INTEGER,
@@ -21,11 +22,11 @@ Player.init(
           key: 'id',
         },
       },
-      hunt_id: {
+      code: {
         type: DataTypes.INTEGER,
         references: {
           model: 'hunt',
-          key: 'hunt_id',
+          key: 'code',
         },
       },
     },
