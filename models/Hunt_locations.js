@@ -14,6 +14,7 @@ Hunt_location.init(
     location: {
         type: DataTypes.STRING,
         allowNull: false,
+        primaryKey: true,
     },
   },
   {

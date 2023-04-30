@@ -8,11 +8,25 @@ Player.init(
     {
       id: {
         type: DataTypes.INTEGER,
+        primaryKey: true,
         references: {
             model: 'user',
             key: 'id',
         },
-        primaryKey: true,
+      },
+      host_id: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'host',
+          key: 'id',
+        },
+      },
+      hunt_id: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'hunt',
+          key: 'hunt_id',
+        },
       },
     },
     {

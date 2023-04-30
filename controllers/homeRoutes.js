@@ -3,7 +3,7 @@ const router = require('express').Router();
 //when a GET request is received on the root(/) route,
 //render the home.handlebars view
 router.get('/', (req, res) => {
-    res.render('main');
+    res.render('layouts/main');
   });
 
 module.exports = router;

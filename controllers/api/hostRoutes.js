@@ -1,0 +1,75 @@
+const router = require('express').Router();
+const { Host } = require('../../models');
+
+//This POST route is for creating a new host
+router.post('/', async (req, res) => {
+    try {
+        const hostData = await Host.create(req.body);
+    
+        req.session.save(() => {
+        req.session.host_id = hostData.id;
+    
+        res.status(200).json(hostData);
+        });
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+
+//GET route for host information
+router.get('/:id', async (req, res) => {
+    try {
+        const hostData = await Host.findByPk(req.params.id);
+        
+        if (!hostData) {
+        res.status(404).json({ message: 'No host found with this id!' });
+        return;
+        } else {
+        res.status(200).json(hostData);
+        }
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+//PUT route for updating host information
+router.put('/:id', async (req, res) => {
+    try {
+        const hostData = await Host.update(req.body, {
+            where: {
+                id: req.params.id,
+            },
+        });
+
+        if (!hostData) {
+            res.status(404).json({ message: 'No host found with this id!' });
+            return;
+        } else {
+            res.status(200).json(hostData);
+        }
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+//DELETE route for deleting host
+router.delete('/:id', async (req, res) => {
+    try {
+        const hostData = await Host.destroy({
+            where: {
+                id: req.params.id,
+            },
+        });
+
+        if (!hostData) {
+            res.status(404).json({ message: 'No host found with this id!' });
+            return;
+        } else {
+            res.status(200).json(hostData);
+        }
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+module.exports = router;
