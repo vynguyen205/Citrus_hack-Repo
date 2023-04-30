@@ -15,8 +15,27 @@
                 <a href="#">About</a>
                 <a href="#">Services</a>
                 <a href="#">Contact</a>
-                <button class="login_button">Login</button>
+                <!-- button will trigger modal -->
+                <button class="login_button">Host Login</button>
+                <!-- modal -->
+                <div class="login-modal">=
+                    <div class="login-box">
+                        <h3>Login</h3>
+                        <label>Email</label>
+                        <input type="email" required>
+                        <label>Password</label>
+                        <input type="password" required>
+                        <!-- add new player login-->
+                    </div>
+                </div>
+
             </nav>
         </header>
+        <div class="center-form">
+            <form>
+                <input name="gameID" placeholder="Game PIN" value pattern="[0-9]*">
+                <button>Enter</button>
+            </form>
+        </div>
     </body>
 </html>
