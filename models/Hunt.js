@@ -5,7 +5,7 @@ class Hunt extends Model {}
 
 Hunt.init(
   {
-    hunt_id: {
+    code: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
@@ -20,11 +20,16 @@ Hunt.init(
     },
     duration: {
       type: DataTypes.TIME,
-      allowNull: false,
+      allowNull: true,
       defaultValue: DataTypes.NOW,
+    },
+    num_of_players: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
     },
     host_id: {
       type: DataTypes.INTEGER,
+      primaryKey: true,
       references: {
         model: 'host',
         key: 'id',
