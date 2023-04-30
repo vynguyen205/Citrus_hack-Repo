@@ -25,6 +25,7 @@ Hunt.init(
     },
     host_id: {
       type: DataTypes.INTEGER,
+      primaryKey: true,
       references: {
         model: 'host',
         key: 'id',

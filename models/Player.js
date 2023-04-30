@@ -2,9 +2,9 @@ const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 
-class Host extends Model {}
+class Player extends Model {}
 
-Host.init(
+Player.init(
     {
       id: {
         type: DataTypes.INTEGER,
@@ -12,7 +12,6 @@ Host.init(
             model: 'user',
             key: 'id',
         },
-        primaryKey: true,
       },
     },
     {
@@ -20,8 +19,8 @@ Host.init(
       timestamps: false,
       freezeTableName: true,
       underscored: true,
-      modelName: 'host',
+      modelName: 'player',
     }
   );
   
-  module.exports = Host;
+  module.exports = Player;
