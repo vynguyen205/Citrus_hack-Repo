@@ -1,15 +1,19 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Project extends Model {}
+class Hunt extends Model {}
 
-Project.init(
+Hunt.init(
   {
-    id: {
+    hunt_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
+    },
+    code: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     name: {
       type: DataTypes.STRING,
@@ -18,20 +22,22 @@ Project.init(
     description: {
       type: DataTypes.STRING,
     },
-    date_created: {
-      type: DataTypes.DATE,
-      allowNull: false,
+    duration: {
+      type: DataTypes.TIME,
+      allowNull: true,
       defaultValue: DataTypes.NOW,
     },
-    needed_funding: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-    },
-    user_id: {
+    num_of_players: {
       type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 0,
+    },
+    host_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
       references: {
-        model: 'user',
-        key: 'id',
+        model: 'host',
+        key: 'host_id',
       },
     },
   },
@@ -40,8 +46,8 @@ Project.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'project',
+    modelName: 'hunt',
   }
 );
 
-module.exports = Project;
+module.exports = Hunt;

@@ -1,25 +1,34 @@
 const sequelize = require('../config/connection');
-const { User, Project } = require('../models');
+const { User, Hunt } = require('../models');
 
 const userData = require('./userData.json');
-const projectData = require('./projectData.json');
+const huntsData = require('./huntsData.json');
 
 const seedDatabase = async () => {
-  await sequelize.sync({ force: true });
+  try {
 
-  const users = await User.bulkCreate(userData, {
-    individualHooks: true,
-    returning: true,
-  });
-
-  for (const project of projectData) {
-    await Project.create({
-      ...project,
-      user_id: users[Math.floor(Math.random() * users.length)].id,
+    await sequelize.sync({ force: true });
+    console.log('🤝 Nice! Database is synced 🤝\n');
+    
+    const users = await User.bulkCreate(userData, {
+      individualHooks: true,
+      returning: true,
     });
-  }
 
-  process.exit(0);
+    for (const hunts of huntsData) {
+      await Hunt.create({
+        ...hunts,
+        id: users[Math.floor(Math.random() * users.length)].id,
+      });
+    }
+    console.log('🗄 Nice! Words are added 🗄');
+  
+    process.exit(0);
+
+  } catch (err) {
+    console.log(err);
+    console.log('🚨🚨🚨 SOMETHING WENT WRONG 🚨🚨🚨', err);
+  }
 };
 
 seedDatabase();

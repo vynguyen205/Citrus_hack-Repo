@@ -1,13 +1,13 @@
-const User = require('./User');
-const Project = require('./Project');
+const Host = require('./Host');
+const Hunt = require('./Hunt');
+const Player = require('./Player');
 
-User.hasMany(Project, {
-  foreignKey: 'user_id',
-  onDelete: 'CASCADE'
+Host.hasMany(Hunt, {
+  onDelete: 'CASCADE',
 });
 
-Project.belongsTo(User, {
-  foreignKey: 'user_id'
-});
+Hunt.belongsTo(Host);
 
-module.exports = { User, Project };
+// Player.hasOne()
+
+module.exports = { Host, Hunt, Player };
